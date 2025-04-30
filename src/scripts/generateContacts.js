@@ -3,23 +3,22 @@ import { writeContacts } from '../utils/writeContacts.js';
 import { createFakeContact } from '../utils/createFakeContact.js';
 
 const generateContacts = async (number) => {
-    try {
-      const existingContacts = await readContacts();
+  try {
+    const existingContacts = await readContacts();
 
-      const newContacts = Array.from({ length: number }, () =>
-        createFakeContact(),
-      );
+    const newContacts = Array.from({ length: number }, () =>
+      createFakeContact(),
+    );
 
-      const updatedContacts = [...existingContacts, ...newContacts];
+    const updatedContacts = [...existingContacts, ...newContacts];
 
-      await writeContacts(updatedContacts);
+    await writeContacts(updatedContacts);
 
-      console.log(
-        `Додано ${number} нових контактів. Загалом контактів: ${updatedContacts.length}`,
-      );
-    } catch (error) {
-      console.error('Помилка при створенні контактів:', error);
-    }
+    console.log(`${number} new contacts have been added. Total contacts: ${updatedContacts.length}`,
+    );
+  } catch (error) {
+    console.error('Error generating contacts:', error);
+  }
 };
 
 generateContacts(5);

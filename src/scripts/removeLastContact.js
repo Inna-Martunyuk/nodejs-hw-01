@@ -2,24 +2,22 @@ import { readContacts } from '../utils/readContacts.js';
 import { writeContacts } from '../utils/writeContacts.js';
 
 export const removeLastContact = async () => {
-    try {
+  try {
+    const contacts = await readContacts();
 
-      const contacts = await readContacts();
-
-
-      if (contacts.length === 0) {
-        console.log('Немає контактів для видалення.');
-        return;
-      }
-
-      contacts.pop();
-
-      await writeContacts(contacts);
-
-      console.log('Останній контакт успішно видалено.');
-    } catch (error) {
-      console.error('Помилка при видаленні останнього контакту:', error);
+    if (contacts.length === 0) {
+      console.log('No contacts to delete.');
+      return;
     }
+
+    contacts.pop();
+
+    await writeContacts(contacts);
+
+    console.log('The last contact has been successfully deleted.');
+  } catch (error) {
+    console.error('Error deleting the last contact:', error);
+  }
 };
 
 removeLastContact();
